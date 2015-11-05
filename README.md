@@ -5,17 +5,17 @@ Research how Python code can be used in network programming. Develop a short que
 
 1.Layout 2
 
-2. Proper user manual 8 (How is the software to be executed. Screenshots to be included)
+2.Proper user manual 8 (How is the software to be executed. Screenshots to be included)
 
-3. Documentation 2
+3.Documentation 2
 
-4. Fully working program demo 12, (State program objectives before the practical demo is done)
+4.Fully working program demo 12, (State program objectives before the practical demo is done)
 
-5. Program design 5
+5.Program design 5
 
-6. Report Overall Quality 11
+6.Report Overall Quality 11
 
-7. Presentation 5
+7.Presentation 5
 
 Program design refers to how the software is laid out with try..catch blocks, checking error conditions, proper use of methods etc.
 Note: Individual assessments may be done on the Group projects by the lecturer.
