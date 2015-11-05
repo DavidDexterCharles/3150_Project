@@ -3,19 +3,19 @@ Research how Python code can be used in network programming. Develop a short que
 
 #Marking Scheme
 
-1.Layout 2
+1.Layout (2 marks)
 
-2.Proper user manual 8 (How is the software to be executed. Screenshots to be included)
+2.Proper user manual (8 marks) (How is the software to be executed. Screenshots to be included)
 
-3.Documentation 2
+3.Documentation (2 marks)
 
-4.Fully working program demo 12, (State program objectives before the practical demo is done)
+4.Fully working program demo (12 marks), (State program objectives before the practical demo is done)
 
-5.Program design 5
+5.Program design (5 marks)
 
-6.Report Overall Quality 11
+6.Report Overall Quality (11 marks)
 
-7.Presentation 5
+7.Presentation (5 marks)
 
 Program design refers to how the software is laid out with try..catch blocks, checking error conditions, proper use of methods etc.
 Note: Individual assessments may be done on the Group projects by the lecturer.
