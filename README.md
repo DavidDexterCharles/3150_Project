@@ -2,8 +2,8 @@
 Research how Python code can be used in network programming. Develop a short question/answer game in several versions. The versions are: Java TCP, Java UDP, Python TCP, Python UDP. Produce a user manual to show how the different programs vary. Functionality of the developed programms should included added functionality and features in comparison to the Initial assignments 1 and 2.
 
 #Marking Scheme
-.Layout 2
-.Proper user manual 8 (How is the software to be executed.
+*Layout 2
+*Proper user manual 8 (How is the software to be executed.
 >Screenshots to be included)
 >Documentation 2
 >Fully working program demo 12
