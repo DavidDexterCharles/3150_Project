@@ -1,3 +1,13 @@
+#DEADLINES
+
+Thursday November 12th, 2015 Project draft check
+
+>Expected: objectives established,basic code drafted and possibly some screenshots. Analysis of project must be totally completed.
+
+Tuesday November 24th, 2015 Presentations.
+
+>Report due before presentation. Submit an electronic copy to the lecturer and give in a hard copy on the day of the presentation. A multimedia projector would be provided.
+
 # 3150_Project
 Research how Python code can be used in network programming. Develop a short question/answer game in several versions. The versions are: Java TCP, Java UDP, Python TCP, Python UDP. Produce a user manual to show how the different programs vary. Functionality of the developed programms should included added functionality and features in comparison to the Initial assignments 1 and 2.
 
