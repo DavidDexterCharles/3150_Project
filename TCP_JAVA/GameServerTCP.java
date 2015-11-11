@@ -18,7 +18,7 @@ class GameServerTCP {
 
     public  void ServerSession() throws Exception
     {
-    	 ServerSocket welcomeSocket = new ServerSocket(8000);//Create welcome socket at port 8000
+    	 ServerSocket welcomeSocket = new ServerSocket(6000);//Create welcome socket at port 8000
     	 System.out.println("Server running....");
     	 String reply=" ";
     	 String aquestion= " ";
@@ -31,7 +31,7 @@ class GameServerTCP {
            	InetAddress IP = connectionSocket.getInetAddress();// IP of the client
            	String ClientIP = IP.getHostAddress();
            	//System.out.println(ClientIP);
-			//System.out.println("Data received from Client IP Address "+ ClientIP);
+			System.out.println("Data received from Client IP Address "+ ClientIP);
 
 			//create input stream attached to soccket
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));

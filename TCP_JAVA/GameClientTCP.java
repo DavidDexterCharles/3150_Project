@@ -28,7 +28,7 @@ class GameClientTCP {
 			BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in));
 			InetAddress IPAddress = InetAddress.getLocalHost();//InetAddress.getByName(" ");
 			//create client socket connect to server
-			Socket ClientSocket = new Socket(IPAddress,8000);//IPAddress and Portnumber
+			Socket ClientSocket = new Socket("192.168.200.149",6000);//IPAddress and Portnumber
 
 			//create output stream attached to socket
 			DataOutputStream outToServer = new DataOutputStream(ClientSocket.getOutputStream());
