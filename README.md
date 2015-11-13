@@ -9,7 +9,14 @@ Tuesday November 24th, 2015 Presentations.
 >Report due before presentation. Submit an electronic copy to the lecturer and give in a hard copy on the day of the presentation. A multimedia projector would be provided.
 
 # 3150_Project
-Research how Python code can be used in network programming. Develop a short question/answer game in several versions. The versions are: Java TCP, Java UDP, Python TCP, Python UDP. Produce a user manual to show how the different programs vary. Functionality of the developed programms should included added functionality and features in comparison to the Initial assignments 1 and 2.
+ Server: 
+	A network application that when run allows a user to host questions from a question sheet. When the user hosts the game then he can wait for others to connect even himself. Then he starts the game when the server has received all of the ready status from all the connected other players, he himself as stated before can also be a player, but he would have to run the separate player app. 
+Client: 
+	This is the player app, Multiple players would be able to connect to the game host (via threads), players can then all start the game and when the game is over each player knows who finished first and who got the highest score.
+
+Technologies:
+Java, Jcreator, Netbeans, JavaFX, Eclipse
+
 
 #Marking Scheme
 
