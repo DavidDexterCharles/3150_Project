@@ -18,9 +18,6 @@ public static void main(String args[]) throws IOException{
     BufferedReader br=null;
     BufferedReader is=null;
     PrintWriter os=null;
-    int check=0;
-     int timeout=0;
-    int numquestions=0;
 
     try {
         s1=new Socket(address, 4445); // You can use static final constant PORT_NUM
@@ -38,57 +35,13 @@ public static void main(String args[]) throws IOException{
 
     String response=null;
     try{
-
-        line="start";//br.readLine();
+        line=br.readLine();
         while(line.compareTo("QUIT")!=0){
-
-                if(line.equals("start"))
-                {
-                	os.println(line);
-               		os.flush();
-                	numquestions=Integer.parseInt(is.readLine());
-                	check=numquestions;
-                	line = "waiting";
-                	System.out.println("Server Response : "+check);
-
-                }
-                else
-                if(line.equals("waiting"))
-                {
-                	os.println(line);
-               		os.flush();
-               		response=is.readLine();
-               		if(response.equals("waiting")){
-               				//System.out.println("Players "+response);
-               				line = "waiting";
-               				timeout++;
-               		}
-               		else{
-               			System.out.println("Players "+response);
-               			line=br.readLine();
-               		}
-
-
-
-
-                }
-                else
-                if(response.equals("startgame"))
-                {
-                	line= Integer.toString((numquestions-check)+1);
-                	check=check-1;
-                }
-                else{
-
+                os.println(line);
+                os.flush();
                 response=is.readLine();
                 System.out.println("Server Response : "+response);
                 line=br.readLine();
-                }
-                /*if(timeout>=200000)
-                {
-                 	System.out.println("Game Timed Out");
-                 	line=br.readLine();
-                }*/
 
             }
 

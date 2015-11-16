@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class QuestionHandler { // The QuestionHandler class is used to allow a program to easily access and use Questions and Answers which are stored in a textfile
-
+        //http://stackoverflow.com/questions/19871955/java-io-filenotfoundexception-the-system-cannot-find-the-file-specified
 	private String fileName = "src/questions.txt";//"short.txt"; //short.txt is a text file that was used for debugging it contains only 3 questions, also it should be noted after the last answer to the last question in the text file there should be no spaces or new line "\n" characters or an error can occur.
 	private	Queue <Integer> q = new LinkedList<Integer>();// Declaration of a Queue
 	private	ArrayList<String> Questions = new ArrayList<String>();
@@ -20,8 +20,9 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 	static int points = 0;
 	static int pointval=10;
     public QuestionHandler() {
-
+               
 		init();
+                 
 
     }
     public void reset() {// This function resets the certain variables and data structures  to a state that would seem as if questions are been asked an answered for the first time
@@ -144,13 +145,14 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 
 
 
-    private void init()// this function is used by the QuestionHandler Constructor, it reads in The questions and answers from a textfile(questions.txt or short.txt), and stores them in an arraylist to be used
+    public void init()// this function is used by the QuestionHandler Constructor, it reads in The questions and answers from a textfile(questions.txt or short.txt), and stores them in an arraylist to be used
     {
+         //System.out.println("Grapes");
     	 try {
+             
 
-            FileReader fileReader = new FileReader(fileName);// FileReader reads text files in the default encoding.
-
-
+            
+             FileReader fileReader = new FileReader(fileName);// FileReader reads text files in the default encoding.
             BufferedReader bufferedReader = new BufferedReader(fileReader);// FileReader wraped in BufferedReader.
 			int counter=1;
             while((line = bufferedReader.readLine()) != null) {
@@ -180,7 +182,7 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
                 "Error reading file '"
                 + fileName + "'");
             // Or
-            // ex.printStackTrace();
+//             ex.printStackTrace();
         }
     }
 }

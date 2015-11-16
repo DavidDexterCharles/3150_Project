@@ -1,6 +1,6 @@
 //Student ID: 811000385
 //Assignment 1
-
+//http://examples.javacodegeeks.com/java-basics/java-map-example/
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -8,7 +8,11 @@ import java.util.*;
 class GameServerTCP {
 
     private static GameServerTCP server = new GameServerTCP();
-	private QuestionHandler question = new QuestionHandler();
+    private QuestionHandler question = new QuestionHandler();
+   // public static ArrayList<String> players = new ArrayList<String>();
+    static int count = 0;
+    Map players = new HashMap();
+
 
  	public static void main(String argv[]) throws Exception
     {
@@ -37,11 +41,16 @@ class GameServerTCP {
            	//System.out.println(ClientIP);
 			System.out.println("Data received from Client IP Address "+ ClientIP);
 			System.out.println("connection Established");
+                        //players.clear();
+                        //players.put(ClientIP,count);//Real version
+                        players.put(count,ClientIP);// Testing purposes
+                        count=count+1;
+                        int max=4;
 
 		/////////////////////////////////////////////////////////////
 
-			ServerThread st=new ServerThread(connectionSocket);
-            st.start();
+			ServerThread st=new ServerThread(connectionSocket,question,players,max);
+                        st.start();
 		 	}
 		 	catch(Exception e){
 		        e.printStackTrace();
@@ -112,18 +121,37 @@ class GameServerTCP {
 
 
 class ServerThread extends Thread{
+   
 
     String line=null;
     BufferedReader  is = null;
     PrintWriter os=null;
     Socket s=null;
+    
+    String reply=" ";
+    String aquestion= " ";
+    String answer = " ";
+    String response="";
+    QuestionHandler question=null;  
+    Map players=null;
+    
+     BufferedReader inFromClient = null;//new BufferedReader(new InputStreamReader(s.getInputStream()));
+     DataOutputStream  outToClient=null;
+    private int max;
+    
 
-    public ServerThread(Socket s){
+    public ServerThread(Socket s,QuestionHandler question,Map players,int max){
         this.s=s;
+        this.question = question;
+        this.players=players;
+        this.max=max;
+        
     }
 
     public void run() {
     try{
+      
+        
         is= new BufferedReader(new InputStreamReader(s.getInputStream()));
         os=new PrintWriter(s.getOutputStream());
 
@@ -133,12 +161,35 @@ class ServerThread extends Thread{
 
     try {
         line=is.readLine();
+        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
         while(line.compareTo("QUIT")!=0){
-
-            os.println(line);
-            os.flush();
-            System.out.println("Response to Client  :  "+line);
-            line=is.readLine();
+            if(line.toLowerCase().equals("start"))
+            {
+                os.println( question.getnumQuestions());os.flush();
+                System.out.println("Response to Client  :  "+line);
+                line=is.readLine();
+            }
+            if(line.trim().equals("waiting"))
+            {
+                //line=br.readLine();
+                if(players.size()>=max)
+                {
+                    os.println( players);
+                    os.flush();
+                }
+                else
+                {
+                    os.println( "waiting");
+                    os.flush();
+                }
+            }
+            else
+            {
+                os.println( question. getQuestion(1));
+                os.flush();
+                System.out.println("Response to Client  :  "+line);
+            }
+             line=is.readLine();
 
         }
     } catch (IOException e) {
@@ -151,27 +202,30 @@ class ServerThread extends Thread{
         System.out.println("Client "+line+" Closed");
     }
 
-    finally{
-    try{
-        System.out.println("Connection Closing..");
-        if (is!=null){
-            is.close();
-            System.out.println(" Socket Input Stream Closed");
-        }
+    finally
+    {
+        try
+        {
+            System.out.println("Connection Closing..");
+            if (is!=null){
+                is.close();
+                System.out.println(" Socket Input Stream Closed");
+            }
 
-        if(os!=null){
-            os.close();
-            System.out.println("Socket Out Closed");
-        }
-        if (s!=null){
-        s.close();
-        System.out.println("Socket Closed");
-        }
+            if(os!=null){
+                os.close();
+                System.out.println("Socket Out Closed");
+            }
+            if (s!=null){
+                s.close();
+                System.out.println("Socket Closed");
+            }
 
         }
-    catch(IOException ie){
-        System.out.println("Socket Close Error");
-    }
+        catch(IOException ie)
+        {
+            System.out.println("Socket Close Error");
+        }
     }//end finally
-    }
+    }//end run
 }
