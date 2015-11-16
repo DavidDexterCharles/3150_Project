@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.*;
 
 public class NetworkClient {
 
@@ -37,7 +38,7 @@ public static void main(String args[]) throws IOException{
     System.out.println("Client Address : "+address);
     System.out.println("Enter Data to echo Server ( Enter QUIT to end):");
 
-    String response=null;
+    String response="A|_|B";
 
     String qnum ="";
     String old_qnum ="";
@@ -45,6 +46,7 @@ public static void main(String args[]) throws IOException{
     try{
 
         line="start";//br.readLine();
+        StringTokenizer st = new StringTokenizer(response,"|_|");
         while(line.compareTo("QUIT")!=0){
 
                 if(line.equals("start"))
@@ -101,8 +103,10 @@ public static void main(String args[]) throws IOException{
                 	os.println(line);
                		os.flush();
                		response = is.readLine();
-               		System.out.println(response);
-               		line=br.readLine();
+               		st = new StringTokenizer(response,"|_|");
+               		System.out.println(st.nextToken());
+               		System.out.println(st.nextToken());
+               		//line=br.readLine();
                 }
                /* else
                 if(response.equals("startgame"))

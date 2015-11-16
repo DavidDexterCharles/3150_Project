@@ -172,6 +172,7 @@ class ServerThread extends Thread{
         line=is.readLine();
         BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(line,"|_|");
+        StringTokenizer token = new StringTokenizer(line,"|_|");
         while(line.compareTo("QUIT")!=0){
             st = new StringTokenizer(line,"|_|");
             if(line.toLowerCase().equals("start"))
@@ -233,6 +234,11 @@ class ServerThread extends Thread{
                 
                 
                 line=is.readLine();
+                token = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
+                nextquestion=token.nextToken();
+                correctans= question.getAnswer(Integer.parseInt(token.nextToken()));
+                clientanswer=token.nextToken();
+                newquestion = question.getQuestion(Integer.parseInt(token.nextToken()));
             }
 //            else
 //            {
