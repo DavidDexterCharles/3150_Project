@@ -45,7 +45,7 @@ class GameServerTCP {
                         //players.put(ClientIP,count);//Real version
                         players.put(count,ClientIP);// Testing purposes
                         count=count+1;
-                        int max=4;
+                        int max=2;
 
 		/////////////////////////////////////////////////////////////
 
@@ -162,7 +162,9 @@ class ServerThread extends Thread{
     try {
         line=is.readLine();
         BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(line,"|_|");
         while(line.compareTo("QUIT")!=0){
+            st = new StringTokenizer(line,"|_|");
             if(line.toLowerCase().equals("start"))
             {
                 os.println( question.getnumQuestions());os.flush();
@@ -179,17 +181,23 @@ class ServerThread extends Thread{
                 }
                 else
                 {
-                    os.println( "waiting");
+                    os.println("waiting");
                     os.flush();
                 }
+                line=is.readLine();
             }
-            else
+            if(st.nextToken().equals("startgame"))
             {
-                os.println( question. getQuestion(1));
+                os.println( question. getQuestion(Integer.parseInt(st.nextToken())));
                 os.flush();
-                System.out.println("Response to Client  :  "+line);
             }
-             line=is.readLine();
+//            else
+//            {
+//                os.println( question. getQuestion(1));
+//                os.flush();
+//                System.out.println("Response to Client  :  "+line);
+//            }
+             //line=is.readLine();
 
         }
     } catch (IOException e) {
@@ -228,4 +236,6 @@ class ServerThread extends Thread{
         }
     }//end finally
     }//end run
+    
+    
 }

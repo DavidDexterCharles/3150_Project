@@ -37,6 +37,9 @@ public static void main(String args[]) throws IOException{
     System.out.println("Enter Data to echo Server ( Enter QUIT to end):");
 
     String response=null;
+
+    String qnum ="";
+
     try{
 
         line="start";//br.readLine();
@@ -65,14 +68,26 @@ public static void main(String args[]) throws IOException{
                		}
                		else{
                			System.out.println("Players "+response);
-               			line=br.readLine();
+               			line = "startgame";
+
+               		//	line=br.readLine();
                		}
+                }
 
-
+                if(line.equals("startgame"))
+                {
+                	qnum=Integer.toString((numquestions-check));
+                	line="startgame"+"|_|"+qnum ;
+                	check=check-1;
+                	os.println(line);
+               		os.flush();
+               		response = is.readLine();
+               		System.out.println("Question : "+response);
+               		line=br.readLine();
 
 
                 }
-                else
+               /* else
                 if(response.equals("startgame"))
                 {
                 	line= Integer.toString((numquestions-check)+1);
@@ -83,7 +98,7 @@ public static void main(String args[]) throws IOException{
                 response=is.readLine();
                 System.out.println("Server Response : "+response);
                 line=br.readLine();
-                }
+                }*/
                 /*if(timeout>=200000)
                 {
                  	System.out.println("Game Timed Out");
