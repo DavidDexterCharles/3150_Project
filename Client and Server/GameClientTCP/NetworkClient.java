@@ -21,6 +21,7 @@ public static void main(String args[]) throws IOException{
     int check=0;
      int timeout=0;
     int numquestions=0;
+    boolean gamestarted=false;
 
     try {
         s1=new Socket(address, 4445); // You can use static final constant PORT_NUM
@@ -39,7 +40,8 @@ public static void main(String args[]) throws IOException{
     String response=null;
 
     String qnum ="";
-
+    String old_qnum ="";
+	String ans ="";
     try{
 
         line="start";//br.readLine();
@@ -55,7 +57,7 @@ public static void main(String args[]) throws IOException{
                 	System.out.println("Server Response : "+check);
 
                 }
-                else
+
                 if(line.equals("waiting"))
                 {
                 	os.println(line);
@@ -70,7 +72,7 @@ public static void main(String args[]) throws IOException{
                			System.out.println("Players "+response);
                			line = "startgame";
 
-               		//	line=br.readLine();
+               			//line=br.readLine();
                		}
                 }
 
@@ -82,10 +84,25 @@ public static void main(String args[]) throws IOException{
                 	os.println(line);
                		os.flush();
                		response = is.readLine();
-               		System.out.println("Question : "+response);
+               		System.out.println(response);
+
+               	//	line=br.readLine();
+               		gamestarted=true;
+
+
+                }
+                if(gamestarted==true)
+                {
+                	old_qnum=qnum;
+                	qnum=Integer.toString((numquestions-check));
+                	check=check-1;
+                	ans=br.readLine();
+                	line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum;
+                	os.println(line);
+               		os.flush();
+               		response = is.readLine();
+               		System.out.println(response);
                		line=br.readLine();
-
-
                 }
                /* else
                 if(response.equals("startgame"))

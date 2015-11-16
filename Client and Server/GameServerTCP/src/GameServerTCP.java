@@ -127,13 +127,22 @@ class ServerThread extends Thread{
     BufferedReader  is = null;
     PrintWriter os=null;
     Socket s=null;
-    
+    String correctans ="";
+    String clientanswer ="";
     String reply=" ";
     String aquestion= " ";
     String answer = " ";
     String response="";
+    
+    String nextquestion="";
+    
+    String response2="";
+    
+    String newquestion="";
+    String debug ="";
     QuestionHandler question=null;  
     Map players=null;
+  
     
      BufferedReader inFromClient = null;//new BufferedReader(new InputStreamReader(s.getInputStream()));
      DataOutputStream  outToClient=null;
@@ -190,6 +199,40 @@ class ServerThread extends Thread{
             {
                 os.println( question. getQuestion(Integer.parseInt(st.nextToken())));
                 os.flush();
+                // System.out.println("st Value 1 : "+st);
+                line=is.readLine();
+                System.out.println("line Value 1 : "+line);
+                st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
+                nextquestion=st.nextToken();
+                correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
+                clientanswer=st.nextToken();
+                newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
+                
+                //System.out.println("st Value 2 : "+st.nextToken());
+            }
+            if(nextquestion.equals("nextq"))
+            {
+                System.out.println("APPLES Forever");
+               
+//                correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
+//                clientanswer=st.nextToken();
+//                newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
+                if(correctans.equalsIgnoreCase(clientanswer))
+                {
+                    response2 = correctans+" is correct"+"|_|"+newquestion;
+                    os.println(response2 );
+                    os.flush();
+                }
+                else
+                {
+                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+newquestion;
+                    os.println(response2 );
+                    os.flush();
+                
+                }
+                
+                
+                line=is.readLine();
             }
 //            else
 //            {
