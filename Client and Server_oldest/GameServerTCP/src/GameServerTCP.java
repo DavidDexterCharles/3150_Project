@@ -45,7 +45,7 @@ class GameServerTCP {
                         //players.put(ClientIP,count);//Real version
                         players.put(count,ClientIP);// Testing purposes
                         count=count+1;
-                        int max=2;
+                        int max=4;
 
 		/////////////////////////////////////////////////////////////
 
@@ -127,22 +127,13 @@ class ServerThread extends Thread{
     BufferedReader  is = null;
     PrintWriter os=null;
     Socket s=null;
-    String correctans ="";
-    String clientanswer ="";
+    
     String reply=" ";
     String aquestion= " ";
     String answer = " ";
     String response="";
-    
-    String nextquestion="";
-    
-    String response2="";
-    
-    String newquestion="";
-    String debug ="";
     QuestionHandler question=null;  
     Map players=null;
-  
     
      BufferedReader inFromClient = null;//new BufferedReader(new InputStreamReader(s.getInputStream()));
      DataOutputStream  outToClient=null;
@@ -171,10 +162,7 @@ class ServerThread extends Thread{
     try {
         line=is.readLine();
         BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(line,"|_|");
-        StringTokenizer token = new StringTokenizer(line,"|_|");
         while(line.compareTo("QUIT")!=0){
-            st = new StringTokenizer(line,"|_|");
             if(line.toLowerCase().equals("start"))
             {
                 os.println( question.getnumQuestions());os.flush();
@@ -191,62 +179,17 @@ class ServerThread extends Thread{
                 }
                 else
                 {
-                    os.println("waiting");
+                    os.println( "waiting");
                     os.flush();
                 }
-                line=is.readLine();
             }
-            if(st.nextToken().equals("startgame"))
+            else
             {
-                os.println( question. getQuestion(Integer.parseInt(st.nextToken())));
+                os.println( question. getQuestion(1));
                 os.flush();
-                // System.out.println("st Value 1 : "+st);
-                line=is.readLine();
-                System.out.println("line Value 1 : "+line);
-                st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
-                nextquestion=st.nextToken();
-                correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
-                clientanswer=st.nextToken();
-                newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
-                
-                //System.out.println("st Value 2 : "+st.nextToken());
+                System.out.println("Response to Client  :  "+line);
             }
-            if(nextquestion.equals("nextq"))
-            {
-                System.out.println("APPLES Forever");
-               
-//                correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
-//                clientanswer=st.nextToken();
-//                newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
-                if(correctans.equalsIgnoreCase(clientanswer))
-                {
-                    response2 = correctans+" is correct"+"|_|"+newquestion;
-                    os.println(response2 );
-                    os.flush();
-                }
-                else
-                {
-                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+newquestion;
-                    os.println(response2 );
-                    os.flush();
-                
-                }
-                
-                
-                line=is.readLine();
-                token = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
-                nextquestion=token.nextToken();
-                correctans= question.getAnswer(Integer.parseInt(token.nextToken()));
-                clientanswer=token.nextToken();
-                newquestion = question.getQuestion(Integer.parseInt(token.nextToken()));
-            }
-//            else
-//            {
-//                os.println( question. getQuestion(1));
-//                os.flush();
-//                System.out.println("Response to Client  :  "+line);
-//            }
-             //line=is.readLine();
+             line=is.readLine();
 
         }
     } catch (IOException e) {
@@ -285,6 +228,4 @@ class ServerThread extends Thread{
         }
     }//end finally
     }//end run
-    
-    
 }
