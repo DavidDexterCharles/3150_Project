@@ -45,9 +45,9 @@ public static void main(String args[]) throws IOException{
 	String ans ="";
     try{
 
-        line="start";//br.readLine();
+        line="start";
         StringTokenizer st = new StringTokenizer(response,"|_|");
-        while(line.compareTo("QUIT")!=0){
+        while(line.compareTo("quit")!=0){
 
                 if(line.equals("start"))
                 {
@@ -98,15 +98,26 @@ public static void main(String args[]) throws IOException{
                 	old_qnum=qnum;
                 	qnum=Integer.toString((numquestions-check));
                 	check=check-1;
-                	ans=br.readLine();
-                	line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum;
-                	os.println(line);
-               		os.flush();
-               		response = is.readLine();
-               		st = new StringTokenizer(response,"|_|");
-               		System.out.println(st.nextToken());
-               		System.out.println(st.nextToken());
-               		//line=br.readLine();
+                	ans=br.readLine().toLowerCase().trim();
+                	if(ans.equals("quit") || Integer.parseInt(qnum)>=numquestions)
+                	{
+                		line="quit";
+                		os.println(line);
+	               		os.flush();
+
+                	}
+                	else
+                	{
+                		line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum;
+	                	os.println(line);
+	               		os.flush();
+	               		response = is.readLine();
+	               		st = new StringTokenizer(response,"|_|");
+	               		System.out.println(st.nextToken());
+	               		System.out.println(st.nextToken());
+                	}
+
+               		
                 }
                /* else
                 if(response.equals("startgame"))
