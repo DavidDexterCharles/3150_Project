@@ -43,6 +43,7 @@ public static void main(String args[]) throws IOException{
     String qnum ="";
     String old_qnum ="";
 	String ans ="";
+	String ClientIP = address.getHostAddress();
     try{
 
         line="start";
@@ -108,7 +109,7 @@ public static void main(String args[]) throws IOException{
                 	}
                 	else
                 	{
-                		line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum;
+                		line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum+"|_|"+ClientIP;
 	                	os.println(line);
 	               		os.flush();
 	               		response = is.readLine();
@@ -117,7 +118,7 @@ public static void main(String args[]) throws IOException{
 	               		System.out.println(st.nextToken());
                 	}
 
-               		
+
                 }
                /* else
                 if(response.equals("startgame"))
