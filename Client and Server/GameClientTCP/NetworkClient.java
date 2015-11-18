@@ -100,6 +100,10 @@ public static void main(String args[]) throws IOException{
                 	qnum=Integer.toString((numquestions-check));
                 	check=check-1;
                 	ans=br.readLine().toLowerCase().trim();
+
+                //	if(ans == null && ans.isEmpty())System.out.println("ANS :"+ans);
+
+                	if(ans == null || ans.isEmpty())ans="error";
                 	if(ans.equals("quit") || Integer.parseInt(qnum)>=numquestions)
                 	{
                 		line="quit";

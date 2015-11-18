@@ -46,7 +46,8 @@ class GameServerTCP {
                         PlayerScores.put(ClientIP, 0);
                        // players.put(count,ClientIP);// Testing purposes
                         count=count+1;
-                        int max=1;
+                        int max=1;// Host can specify how may players can connect to 
+                        int point=10;// Host can specify how much points each question is worth
 
 		/////////////////////////////////////////////////////////////
 
@@ -154,21 +155,21 @@ class ServerThread extends Thread{
                 correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
                 clientanswer=st.nextToken().toLowerCase().trim();
                 newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
-                theclient=token.nextToken();
+                theclient=st.nextToken();
                 System.out.println("The client startgame: "+theclient);
                 }
                 //System.out.println("st Value 2 : "+st.nextToken());
             }
             if(nextquestion.equals("nextq"))
             {
-                System.out.println("APPLES Forever");
+               // System.out.println("APPLES Forever");
                
                 if(correctans.equalsIgnoreCase(clientanswer))
                 {
                   //   score=(int) PlayerScores.get(theclient) + 1;
 //                    PlayerScores.put(theclient,score);
-                    System.out.println("The client: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get("192.168.200.149"));
+                    System.out.println("The client nextquestion: "+theclient);
+                    System.out.println("Player and Score: "+PlayerScores.get("10.64.91.101"));
                     
                     response2 = correctans+" is correct"+"|_|"+newquestion;
                     os.println(response2 );
