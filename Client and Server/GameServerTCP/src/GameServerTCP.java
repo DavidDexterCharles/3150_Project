@@ -24,6 +24,10 @@ class GameServerTCP {
     {
     	 ServerSocket welcomeSocket = new ServerSocket(4445);//Create welcome socket at port 8000
     	 System.out.println("Server running....");
+
+
+    	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files....");
+
     	 String reply=" ";
     	 String aquestion= " ";
     	 String answer = " ";
@@ -46,12 +50,12 @@ class GameServerTCP {
                         PlayerScores.put(ClientIP, 0);
                        // players.put(count,ClientIP);// Testing purposes
                         count=count+1;
-                        int max=1;// Host can specify how may players can connect to 
-                        int point=10;// Host can specify how much points each question is worth
+                        int max=1;// Host can specify how may players can connect to
+                        int points=10;// Host can specify how much points each question is worth
 
 		/////////////////////////////////////////////////////////////
 
-			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max);
+			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points);
                         st.start();
 		 	}
 		 	catch(Exception e){
@@ -65,7 +69,7 @@ class GameServerTCP {
 
 
 class ServerThread extends Thread{
-   
+
 
     String line=null;
     BufferedReader  is = null;
@@ -77,25 +81,27 @@ class ServerThread extends Thread{
     String aquestion= " ";
     String answer = " ";
     String response="";
-    
+	String end ="";
     String nextquestion="";
     String theclient ="";
     int score=0;
     String response2="";
-    
+	String question_new="";
     String newquestion="";
     String debug ="";
-    QuestionHandler question=null;  
+    QuestionHandler question=null;
     Map players=null;
     Map PlayerScores = null;
-    
+
      BufferedReader inFromClient = null;//new BufferedReader(new InputStreamReader(s.getInputStream()));
      DataOutputStream  outToClient=null;
     private int max;
-    
+     private int points;
 
-    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max){
+
+    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max,int points){
         this.s=s;
+        this.points=points;
         this.question = question;
         this.players=players;
         this.max=max;
@@ -104,8 +110,8 @@ class ServerThread extends Thread{
 
     public void run() {
     try{
-      
-        
+
+
         is= new BufferedReader(new InputStreamReader(s.getInputStream()));
         os=new PrintWriter(s.getOutputStream());
 
@@ -128,7 +134,7 @@ class ServerThread extends Thread{
             }
             if(line.trim().equals("waiting"))
             {
-                
+
                 if(players.size()>=max)
                 {
                     os.println( players);
@@ -150,7 +156,7 @@ class ServerThread extends Thread{
                 if(line.equals("quit")==false){
                 System.out.println("line Value 1 : "+line);
                 st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
-                
+
                 nextquestion=st.nextToken();
                 correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
                 clientanswer=st.nextToken().toLowerCase().trim();
@@ -163,27 +169,30 @@ class ServerThread extends Thread{
             if(nextquestion.equals("nextq"))
             {
                // System.out.println("APPLES Forever");
-               
+
                 if(correctans.equalsIgnoreCase(clientanswer))
                 {
-                  //   score=(int) PlayerScores.get(theclient) + 1;
-//                    PlayerScores.put(theclient,score);
+                    score=(int) PlayerScores.get(theclient) + points;
+                    PlayerScores.put(theclient,score);
                     System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get("10.64.91.101"));
-                    
-                    response2 = correctans+" is correct"+"|_|"+newquestion;
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+
+                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient)+"|_|"+newquestion;
                     os.println(response2 );
                     os.flush();
                 }
                 else
                 {
-                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+newquestion;
+
+                    System.out.println("The client nextquestion: "+theclient);
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient)+"|_|"+newquestion;
                     os.println(response2 );
                     os.flush();
-                
+
                 }
-                
-                
+
+
                 line=is.readLine();
                 if(line.equals("quit")==false)
                 {
@@ -191,9 +200,37 @@ class ServerThread extends Thread{
                     nextquestion=token.nextToken();
                     correctans= question.getAnswer(Integer.parseInt(token.nextToken()));
                     clientanswer=token.nextToken().toLowerCase().trim();
-                    newquestion = question.getQuestion(Integer.parseInt(token.nextToken()));
+                    question_new= token.nextToken();
+                    if(question_new.equals("quit")==false)newquestion = question.getQuestion(Integer.parseInt(question_new));
+                    else end="quit";
                     theclient=token.nextToken();
                    // System.out.println("The client: "+theclient);
+                }
+            }
+            if(nextquestion.equals("lastq"))
+            {
+				if(correctans.equalsIgnoreCase(clientanswer))
+                {
+                    score=(int) PlayerScores.get(theclient) + points;
+                    PlayerScores.put(theclient,score);
+                    System.out.println("The client nextquestion: "+theclient);
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+
+                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient)+"|_|"+end;
+                    os.println(response2 );
+                    os.flush();
+                    line ="quit";
+                }
+                else
+                {
+                    System.out.println("The client nextquestion: "+theclient);
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+
+                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient)+"|_|"+end;
+                    os.println(response2 );
+                    os.flush();
+                    line="quit";
+
                 }
             }
 
@@ -234,6 +271,6 @@ class ServerThread extends Thread{
         }
     }//end finally
     }//end run
-    
-    
+
+
 }

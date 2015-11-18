@@ -44,6 +44,9 @@ public static void main(String args[]) throws IOException{
     String old_qnum ="";
 	String ans ="";
 	String ClientIP = address.getHostAddress();
+	String result="";
+	String nextquestion="";
+	String score="0";
     try{
 
         line="start";
@@ -104,22 +107,43 @@ public static void main(String args[]) throws IOException{
                 //	if(ans == null && ans.isEmpty())System.out.println("ANS :"+ans);
 
                 	if(ans == null || ans.isEmpty())ans="error";
-                	if(ans.equals("quit") || Integer.parseInt(qnum)>=numquestions)
+                	if(ans.equals("quit"))
                 	{
                 		line="quit";
+
                 		os.println(line);
 	               		os.flush();
 
                 	}
+                	if(Integer.parseInt(qnum)>=numquestions)
+                	{
+						if(line.equals("quit")==false){
+						line="lastq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+"quit"+"|_|"+ClientIP;
+						os.println(line);
+	               		os.flush();
+	               		response = is.readLine();
+	               		st = new StringTokenizer(response,"|_|");
+	               		result = st.nextToken();
+						score= st.nextToken();
+	               		line = st.nextToken();
+	               		System.out.println(result);
+	               		System.out.println("Current Score: "+score);
+						}
+
+                	}
                 	else
                 	{
+                	  if(line.equals("quit")==false){
+
                 		line="nextq"+"|_|"+old_qnum+"|_|"+ans+"|_|"+qnum+"|_|"+ClientIP;
 	                	os.println(line);
 	               		os.flush();
 	               		response = is.readLine();
 	               		st = new StringTokenizer(response,"|_|");
 	               		System.out.println(st.nextToken());
+	               		System.out.println("Current Score: "+st.nextToken());
 	               		System.out.println(st.nextToken());
+                	  }
                 	}
 
 
