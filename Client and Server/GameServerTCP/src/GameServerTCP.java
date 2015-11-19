@@ -9,6 +9,7 @@ class GameServerTCP {
 
     private static GameServerTCP server = new GameServerTCP();
     private QuestionHandler question = new QuestionHandler();
+   
    // public static ArrayList<String> players = new ArrayList<String>();
     static int count = 0;
     Map players = new HashMap();
@@ -71,7 +72,7 @@ class GameServerTCP {
 
 class ServerThread extends Thread{
 
-
+ private IpHandler ClientIPs = new IpHandler();
     String line=null;
     BufferedReader  is = null;
     PrintWriter os=null;
