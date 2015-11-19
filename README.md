@@ -9,6 +9,8 @@ Tuesday November 24th, 2015 Presentations.
 >Report due before presentation. Submit an electronic copy to the lecturer and give in a hard copy on the day of the presentation. A multimedia projector would be provided.
 
 # 3150_Project
+>7.) Develop an educational client/server game that uses threads and the TCP protocol. Illustrate how clients can be blocked and tracked at the server. The complexity of the games has to be discussed with the lecturer.
+
  Server: 
 	A network application that when run allows a user to host questions from a question sheet. When the user hosts the game then he can wait for others to connect even himself. Then he starts the game when the server has received all of the ready status from all the connected other players, he himself as stated before can also be a player, but he would have to run the separate player app. 
 Client: 
