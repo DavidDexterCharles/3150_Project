@@ -47,8 +47,13 @@ class GameServerTCP {
 			System.out.println("Data received from Client IP Address "+ ClientIP);
 			System.out.println("connection Established");
                         //players.clear();
-                        if(players.containsKey(ClientIP))System.out.println("Add to block list");
-                        players.put(ClientIP,count);//Real version
+                        if(players.containsKey(ClientIP))
+                        {
+                          players.put(ClientIP,1);
+                        }//System.out.println("Add to block list");
+                        else{
+                            players.put(ClientIP,0);//Real version
+                        }
                         PlayerScores.put(ClientIP, 0);
                        // players.put(count,ClientIP);// Testing purposes
                         count=count+1;
@@ -57,7 +62,7 @@ class GameServerTCP {
 
 		/////////////////////////////////////////////////////////////
 
-			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points);
+			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points,ClientIP);
                         st.start();
 		 	}
 		 	catch(Exception e){
@@ -73,6 +78,7 @@ class GameServerTCP {
 class ServerThread extends Thread{
 
  private IpHandler ClientIPs = new IpHandler();
+ String ClientIP="";
     String line=null;
     BufferedReader  is = null;
     PrintWriter os=null;
@@ -101,8 +107,9 @@ class ServerThread extends Thread{
      private int points;
 
 
-    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max,int points){
+    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max,int points,String ClientIP){
         this.s=s;
+        this.ClientIP=ClientIP;
         this.points=points;
         this.question = question;
         this.players=players;
@@ -123,6 +130,7 @@ class ServerThread extends Thread{
 
     try {
         line=is.readLine();
+        
         BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(line,"|_|");
         StringTokenizer token = new StringTokenizer(line,"|_|");
@@ -130,9 +138,19 @@ class ServerThread extends Thread{
             st = new StringTokenizer(line,"|_|");
             if(line.toLowerCase().equals("start"))
             {
-                os.println( question.getnumQuestions());os.flush();
-                System.out.println("Response to Client  :  "+line);
-                line=is.readLine();
+                System.out.println("THE CONNECTED IP"+players.get(ClientIP));
+                if((ClientIPs.blockcheck(ClientIP))||players.get(ClientIP).equals("1"))
+                {
+                    os.println("quit");
+                    os.flush();
+                    line="quit";
+                }
+                else{
+                    os.println( question.getnumQuestions());
+                    os.flush();
+                    System.out.println("Response to Client  :  "+line);
+                    line=is.readLine();
+                }
             }
             if(line.trim().equals("waiting"))
             {
@@ -156,15 +174,15 @@ class ServerThread extends Thread{
                 // System.out.println("st Value 1 : "+st);
                 line=is.readLine();
                 if(line.equals("quit")==false){
-                System.out.println("line Value 1 : "+line);
-                st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
+                    System.out.println("line Value 1 : "+line);
+                    st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
 
-                nextquestion=st.nextToken();
-                correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
-                clientanswer=st.nextToken().toLowerCase().trim();
-                newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
-                theclient=st.nextToken();
-                System.out.println("The client startgame: "+theclient);
+                    nextquestion=st.nextToken();
+                    correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
+                    clientanswer=st.nextToken().toLowerCase().trim();
+                    newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
+                    theclient=st.nextToken();
+                    System.out.println("The client startgame: "+theclient);
                 }
                 //System.out.println("st Value 2 : "+st.nextToken());
             }
@@ -204,14 +222,22 @@ class ServerThread extends Thread{
                     clientanswer=token.nextToken().toLowerCase().trim();
                     question_new= token.nextToken();
                     if(question_new.equals("quit")==false)newquestion = question.getQuestion(Integer.parseInt(question_new));
-                    else end="quit";
+                    else{ 
+                        
+                        end="quit";
+                        
+                    
+                    }
                     theclient=token.nextToken();
                    // System.out.println("The client: "+theclient);
                 }
+         
+                    
+     
             }
             if(nextquestion.equals("lastq"))
             {
-				if(correctans.equalsIgnoreCase(clientanswer))
+		if(correctans.equalsIgnoreCase(clientanswer))
                 {
                     score=(int) PlayerScores.get(theclient) + points;
                     PlayerScores.put(theclient,score);

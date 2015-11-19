@@ -57,11 +57,18 @@ public static void main(String args[]) throws IOException{
                 {
                 	os.println(line);
                		os.flush();
-                	numquestions=Integer.parseInt(is.readLine());
-                	check=numquestions;
-                	line = "waiting";
-                	System.out.println("Server Response : "+check);
+               		response=is.readLine();
+               		if(response.equals("quit")){
+               			System.out.println("Game-Server Access Restricted");
+               			line = "quit";
+               		}
+               		else{
 
+               			numquestions=Integer.parseInt(response);
+	                	check=numquestions;
+	                	line = "waiting";
+	                	System.out.println("Server Response : "+check);
+               		}
                 }
 
                 if(line.equals("waiting"))

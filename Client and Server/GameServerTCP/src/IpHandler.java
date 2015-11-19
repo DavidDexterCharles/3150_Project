@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class IpHandler {
 
-	private String fileName = "restricted.txt";
+	private String fileName = "src/restricted.txt";
 	private	ArrayList<String> restrictedIPS = new ArrayList<String>();
 	private String line = null;
 	public IpHandler() {
