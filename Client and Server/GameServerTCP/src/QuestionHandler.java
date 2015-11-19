@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class QuestionHandler { // The QuestionHandler class is used to allow a program to easily access and use Questions and Answers which are stored in a textfile
         //http://stackoverflow.com/questions/19871955/java-io-filenotfoundexception-the-system-cannot-find-the-file-specified
-	private String fileName = "short.txt";//"src/questions.txt";//"short.txt"; //short.txt is a text file that was used for debugging it contains only 3 questions, also it should be noted after the last answer to the last question in the text file there should be no spaces or new line "\n" characters or an error can occur.
+	private String fileName = "src/short.txt";//"src/questions.txt";//"short.txt"; //short.txt is a text file that was used for debugging it contains only 3 questions, also it should be noted after the last answer to the last question in the text file there should be no spaces or new line "\n" characters or an error can occur.
 	private	Queue <Integer> q = new LinkedList<Integer>();// Declaration of a Queue
 	private	ArrayList<String> Questions = new ArrayList<String>();
 	private	ArrayList<String> Answers = new ArrayList<String>();

@@ -26,7 +26,7 @@ class GameServerTCP {
     	 System.out.println("Server running....");
 
 
-    	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files....");
+    	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files and also block ip address....");
 
     	 String reply=" ";
     	 String aquestion= " ";
@@ -46,6 +46,7 @@ class GameServerTCP {
 			System.out.println("Data received from Client IP Address "+ ClientIP);
 			System.out.println("connection Established");
                         //players.clear();
+                        if(players.containsKey(ClientIP))System.out.println("Add to block list");
                         players.put(ClientIP,count);//Real version
                         PlayerScores.put(ClientIP, 0);
                        // players.put(count,ClientIP);// Testing purposes
