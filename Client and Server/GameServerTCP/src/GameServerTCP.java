@@ -54,15 +54,16 @@ class GameServerTCP {
                         else{
                             players.put(ClientIP,0);//Real version
                         }
-                        PlayerScores.put(ClientIP, 0);
+                        
                        // players.put(count,ClientIP);// Testing purposes
                         count=count+1;
+                        PlayerScores.put(ClientIP+Integer.toString(count), 0);
                         int max=1;// Host can specify how may players can connect to
                         int points=10;// Host can specify how much points each question is worth
 
 		/////////////////////////////////////////////////////////////
 
-			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points,ClientIP);
+			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points,ClientIP,count);
                         st.start();
 		 	}
 		 	catch(Exception e){
@@ -105,9 +106,9 @@ class ServerThread extends Thread{
      DataOutputStream  outToClient=null;
     private int max;
      private int points;
+String count="";
 
-
-    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max,int points,String ClientIP){
+    public ServerThread(Socket s,QuestionHandler question,Map players,Map PlayerScores,int max,int points,String ClientIP,int count){
         this.s=s;
         this.ClientIP=ClientIP;
         this.points=points;
@@ -115,6 +116,7 @@ class ServerThread extends Thread{
         this.players=players;
         this.max=max;
         this.PlayerScores=PlayerScores;
+        this.count=Integer.toString(count);
     }
 
     public void run() {
@@ -139,7 +141,7 @@ class ServerThread extends Thread{
             if(line.toLowerCase().equals("start"))
             {
                 System.out.println("THE CONNECTED IP"+players.get(ClientIP));
-                if((ClientIPs.blockcheck(ClientIP))||players.get(ClientIP).equals("1"))
+                if((ClientIPs.blockcheck(ClientIP)))
                 {
                     os.println("quit");
                     os.flush();
@@ -192,12 +194,12 @@ class ServerThread extends Thread{
 
                 if(correctans.equalsIgnoreCase(clientanswer))
                 {
-                    score=(int) PlayerScores.get(theclient) + points;
-                    PlayerScores.put(theclient,score);
+                    score=(int) PlayerScores.get(theclient+count) + points;
+                    PlayerScores.put(theclient+count,score);
                     System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
 
-                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient)+"|_|"+newquestion;
+                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient+count)+"|_|"+newquestion;
                     os.println(response2 );
                     os.flush();
                 }
@@ -205,8 +207,8 @@ class ServerThread extends Thread{
                 {
 
                     System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
-                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient)+"|_|"+newquestion;
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
+                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient+count)+"|_|"+newquestion;
                     os.println(response2 );
                     os.flush();
 
@@ -239,12 +241,12 @@ class ServerThread extends Thread{
             {
 		if(correctans.equalsIgnoreCase(clientanswer))
                 {
-                    score=(int) PlayerScores.get(theclient) + points;
-                    PlayerScores.put(theclient,score);
+                    score=(int) PlayerScores.get(theclient+count) + points;
+                    PlayerScores.put(theclient+count,score);
                     System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
 
-                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient)+"|_|"+end;
+                    response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient+count)+"|_|"+end;
                     os.println(response2 );
                     os.flush();
                     line ="quit";
@@ -252,9 +254,9 @@ class ServerThread extends Thread{
                 else
                 {
                     System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+PlayerScores.get(theclient));
+                    System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
 
-                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient)+"|_|"+end;
+                    response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient+count)+"|_|"+end;
                     os.println(response2 );
                     os.flush();
                     line="quit";
