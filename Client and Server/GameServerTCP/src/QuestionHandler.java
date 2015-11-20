@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class QuestionHandler { // The QuestionHandler class is used to allow a program to easily access and use Questions and Answers which are stored in a textfile
         //http://stackoverflow.com/questions/19871955/java-io-filenotfoundexception-the-system-cannot-find-the-file-specified
-	private String fileName = "src/short.txt";//"src/questions.txt";//"short.txt"; //short.txt is a text file that was used for debugging it contains only 3 questions, also it should be noted after the last answer to the last question in the text file there should be no spaces or new line "\n" characters or an error can occur.
+	//private String fileName = "src/short.txt";//"src/questions.txt";//"short.txt"; //short.txt is a text file that was used for debugging it contains only 3 questions, also it should be noted after the last answer to the last question in the text file there should be no spaces or new line "\n" characters or an error can occur.
 	private	Queue <Integer> q = new LinkedList<Integer>();// Declaration of a Queue
 	private	ArrayList<String> Questions = new ArrayList<String>();
 	private	ArrayList<String> Answers = new ArrayList<String>();
@@ -19,9 +19,9 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 	static int prevcount = 0;
 	static int points = 0;
 	static int pointval=10;
-    public QuestionHandler() {
+    public QuestionHandler(String fileName) {
 
-		init();
+		init(fileName);
 
 
     }
@@ -113,7 +113,7 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
     	return cleanString(this.Answers.get(i));
 
     }
-	public String getQuestion(int i)// gets a single question
+    public String getQuestion(int i)// gets a single question
     {
     	return this.Questions.get(i);
     }
@@ -133,7 +133,7 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
     {
     	return this.Answers;
     }
-	public ArrayList<String> getQuestions()// returns all the questions in an Arraylist
+    public ArrayList<String> getQuestions()// returns all the questions in an Arraylist
     {
     	return this.Questions;
     }
@@ -145,16 +145,16 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 
 
 
-    public void init()// this function is used by the QuestionHandler Constructor, it reads in The questions and answers from a textfile(questions.txt or short.txt), and stores them in an arraylist to be used
+    public void init(String fileName)// this function is used by the QuestionHandler Constructor, it reads in The questions and answers from a textfile(questions.txt or short.txt), and stores them in an arraylist to be used
     {
          //System.out.println("Grapes");
     	 try {
 
 
 
-             FileReader fileReader = new FileReader(fileName);// FileReader reads text files in the default encoding.
+            FileReader fileReader = new FileReader(fileName);// FileReader reads text files in the default encoding.
             BufferedReader bufferedReader = new BufferedReader(fileReader);// FileReader wraped in BufferedReader.
-			int counter=1;
+	    int counter=1;
             while((line = bufferedReader.readLine()) != null) {
             	if(line != null && line.length() != 0){
 					if((counter % 2)!=0){// It is assumed that in the text file Questions are on one line and answer are on the second line directly after the question, therefore if (counter % 2)!=0 then we are looking at a question and the question is stored in the Questions Arraylist

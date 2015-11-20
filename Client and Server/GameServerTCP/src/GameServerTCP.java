@@ -8,12 +8,16 @@ import java.util.*;
 class GameServerTCP {
 
     private static GameServerTCP server = new GameServerTCP();
-    private QuestionHandler question = new QuestionHandler();
+    
+    
+    BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+    private ArrayList<QuestionHandler>   question = new ArrayList<QuestionHandler>();//new QuestionHandler("src/short.txt");
    
    // public static ArrayList<String> players = new ArrayList<String>();
     static int count = 0;
     Map players = new HashMap();
     Map PlayerScores = new HashMap();
+    boolean acceptfile=true;
 
     public static void main(String argv[]) throws Exception
     {
@@ -28,10 +32,14 @@ class GameServerTCP {
 
 
     	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files and also block ip address....");
-
-    	 String reply=" ";
-    	 String aquestion= " ";
-    	 String answer = " ";
+         
+         
+         
+             question.add(new QuestionHandler("src/short.txt"));
+             
+         
+         
+         
 
 
 		 while(true) {
@@ -63,7 +71,7 @@ class GameServerTCP {
 
 		/////////////////////////////////////////////////////////////
 
-			ServerThread st=new ServerThread(connectionSocket,question,players,PlayerScores,max,points,ClientIP,count);
+			ServerThread st=new ServerThread(connectionSocket,question.get(0),players,PlayerScores,max,points,ClientIP,count);
                         st.start();
 		 	}
 		 	catch(Exception e){
