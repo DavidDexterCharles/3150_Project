@@ -33,9 +33,22 @@ class GameServerTCP {
 
     	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files and also block ip address....");
          
-         
-         
-             question.add(new QuestionHandler("src/short.txt"));
+        String files="src/merge.txt|_|src/short.txt|_|src/questions.txt";
+        int fileamt=2;
+        StringTokenizer token = new StringTokenizer(files,"|_|");
+         int i =0;
+          int x =0;
+         while (i<fileamt)
+         {
+           question.add(new QuestionHandler(token.nextToken()));
+           System.out.println("Array size"+question.get(i).getQuestions().size());
+           i=i+1;
+         }
+         while(x<i-1){
+             question.get(0).getQuestions().addAll(question.get(x+1).getQuestions());
+             question.get(0).getAnswers().addAll(question.get(x+1).getAnswers());
+             x=x+1;
+         }
              
          
          
@@ -55,16 +68,11 @@ class GameServerTCP {
 			System.out.println("Data received from Client IP Address "+ ClientIP);
 			System.out.println("connection Established");
                         //players.clear();
-                        if(players.containsKey(ClientIP))
-                        {
-                          players.put(ClientIP,1);
-                        }//System.out.println("Add to block list");
-                        else{
-                            players.put(ClientIP,0);//Real version
-                        }
                         
-                       // players.put(count,ClientIP);// Testing purposes
+                        
+                       
                         count=count+1;
+                        players.put(ClientIP,count);// Testing purposes
                         PlayerScores.put(ClientIP+Integer.toString(count), 0);
                         int max=1;// Host can specify how may players can connect to
                         int points=10;// Host can specify how much points each question is worth

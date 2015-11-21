@@ -1,5 +1,5 @@
-1.) Should the User Datagram Protocol(UDP) be considered to be more reliable than TCP?(yes/no)
-no
+1.) Are red apples red?
+yes
 
 2.) Is telnet a protocol ?(yes/no)
 yes
