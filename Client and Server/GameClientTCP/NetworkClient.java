@@ -98,8 +98,25 @@ public static void main(String args[]) throws IOException{
                		os.flush();
                		response = is.readLine();
                		System.out.println(response);
+               		if(numquestions==1)
+               		{
+               			ans=br.readLine().toLowerCase().trim();
+               			if(ans == null || ans.isEmpty())ans="error";
+               			line="lastq"+"|_|"+qnum+"|_|"+ans+"|_|"+"quit"+"|_|"+ClientIP;
+               			os.println(line);
+               			os.flush();
+               			response = is.readLine();
+               				System.out.println("Ok Apples : "+response);
 
-               	//	line=br.readLine();
+	               		st = new StringTokenizer(response,"|_|");
+	               		result = st.nextToken();
+						score= st.nextToken();
+	               		line = st.nextToken();
+	               		System.out.println(result);
+	               		System.out.println("Current Score: "+score);
+               		}
+               		else
+
                		gamestarted=true;
 
 
@@ -110,8 +127,6 @@ public static void main(String args[]) throws IOException{
                 	qnum=Integer.toString((numquestions-check));
                 	check=check-1;
                 	ans=br.readLine().toLowerCase().trim();
-
-                //	if(ans == null && ans.isEmpty())System.out.println("ANS :"+ans);
 
                 	if(ans == null || ans.isEmpty())ans="error";
                 	if(ans.equals("quit"))

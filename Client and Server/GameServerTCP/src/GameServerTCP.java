@@ -33,23 +33,33 @@ class GameServerTCP {
 
     	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files and also block ip address....");
          
-        String files="src/merge.txt|_|src/short.txt|_|src/questions.txt";
-        int fileamt=2;
+        String files="src/merge.txt|_|src/short.txt|_|/questions.txt";
         StringTokenizer token = new StringTokenizer(files,"|_|");
+        int fileamt=token.countTokens();
+        System.out.println("Number of Categories: "+fileamt);
          int i =0;
           int x =0;
          while (i<fileamt)
          {
            question.add(new QuestionHandler(token.nextToken()));
-           System.out.println("Array size"+question.get(i).getQuestions().size());
+           //System.out.println("Array size"+question.get(i).getQuestions().size());
+           if(question.get(i).getQuestions().isEmpty())
+           {
+               System.out.println(question.get(i).getemessage());
+               question.remove(i);
+               fileamt=fileamt-1;
+           }
+           else
            i=i+1;
          }
-         while(x<i-1){
-             question.get(0).getQuestions().addAll(question.get(x+1).getQuestions());
-             question.get(0).getAnswers().addAll(question.get(x+1).getAnswers());
-             x=x+1;
-         }
-             
+         if(fileamt==0)System.out.println("No Questions have been Loaded");
+         else{
+            while(x<i-1){
+                question.get(0).getQuestions().addAll(question.get(x+1).getQuestions());
+                question.get(0).getAnswers().addAll(question.get(x+1).getAnswers());
+                x=x+1;
+            }
+
          
          
          
@@ -88,6 +98,7 @@ class GameServerTCP {
 
 		    }
         }// end while
+      }
     }//end server session
 }//close class
 
@@ -197,8 +208,12 @@ String count="";
 
                     nextquestion=st.nextToken();
                     correctans= question.getAnswer(Integer.parseInt(st.nextToken()));
+                    System.out.println("First being last test: "+correctans);
                     clientanswer=st.nextToken().toLowerCase().trim();
-                    newquestion = question.getQuestion(Integer.parseInt(st.nextToken()));
+                    question_new=st.nextToken();
+                    if(question_new.equals("quit")==false)newquestion = question.getQuestion(Integer.parseInt(question_new));
+                    else  end = "quit";
+                    
                     theclient=st.nextToken();
                     System.out.println("The client startgame: "+theclient);
                 }

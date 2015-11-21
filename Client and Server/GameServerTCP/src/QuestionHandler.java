@@ -13,6 +13,7 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 	private	ArrayList<String> Questions = new ArrayList<String>();
 	private	ArrayList<String> Answers = new ArrayList<String>();
 	private	ArrayList<Integer> Q_questions_already_asked = new ArrayList<Integer>();
+        private String emessage="";
     private String line = null;
     private int numquestions=0;
 	static int count = 0;
@@ -137,6 +138,14 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
     {
     	return this.Questions;
     }
+    public void setemessage(String emessage)
+    {
+        this.emessage=emessage;
+    }
+    public String getemessage()
+    {
+        return this.emessage;
+    }
 
 
 
@@ -173,13 +182,17 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
-            System.out.println(
-                "Unable to open file '" +
+//            System.out.println(
+//                "Unable to open file '" +
+//                fileName + "'");
+            setemessage("Unable to open file '" +
                 fileName + "'");
         }
         catch(IOException ex) {
             System.out.println(
                 "Error reading file '"
+                + fileName + "'");
+             setemessage( "Error reading file '"
                 + fileName + "'");
             // Or
 //             ex.printStackTrace();
