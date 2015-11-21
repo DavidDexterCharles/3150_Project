@@ -1,11 +1,11 @@
-1.) Are red apples red?
+Are red apples red?
 yes
 
-2.) Is telnet a protocol ?(yes/no)
+Can birds sing ?(yes/no)
 yes
 
-3.) Does FDM have to do with different channels being transmitted in different frequency bands ?(yes/no)
-yes
+What is the opposite of down?
+up
 
-4.) What is the name given to a transport layer packet ?
+Does a square have four sides?
 segment

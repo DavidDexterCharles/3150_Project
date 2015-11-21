@@ -1,2 +1,2 @@
-1.) Is the text file merger working?
+Is the text file merger working?
 yes

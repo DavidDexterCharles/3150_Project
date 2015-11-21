@@ -47,6 +47,7 @@ public static void main(String args[]) throws IOException{
 	String result="";
 	String nextquestion="";
 	String score="0";
+	String currquestion ="";
     try{
 
         line="start";
@@ -92,12 +93,13 @@ public static void main(String args[]) throws IOException{
                 if(line.equals("startgame"))
                 {
                 	qnum=Integer.toString((numquestions-check));
+					currquestion=Integer.toString((numquestions-check)+1);
                 	line="startgame"+"|_|"+qnum ;
                 	check=check-1;
                 	os.println(line);
                		os.flush();
                		response = is.readLine();
-               		System.out.println(response);
+               		System.out.println(currquestion+".) "+response);
                		if(numquestions==1)
                		{
                			ans=br.readLine().toLowerCase().trim();
@@ -106,7 +108,7 @@ public static void main(String args[]) throws IOException{
                			os.println(line);
                			os.flush();
                			response = is.readLine();
-               				System.out.println("Ok Apples : "+response);
+               				//System.out.println("Ok Apples : "+response);
 
 	               		st = new StringTokenizer(response,"|_|");
 	               		result = st.nextToken();
@@ -125,7 +127,9 @@ public static void main(String args[]) throws IOException{
                 {
                 	old_qnum=qnum;
                 	qnum=Integer.toString((numquestions-check));
+                	currquestion=Integer.toString((numquestions-check)+1);
                 	check=check-1;
+
                 	ans=br.readLine().toLowerCase().trim();
 
                 	if(ans == null || ans.isEmpty())ans="error";
@@ -164,7 +168,7 @@ public static void main(String args[]) throws IOException{
 	               		st = new StringTokenizer(response,"|_|");
 	               		System.out.println(st.nextToken());
 	               		System.out.println("Current Score: "+st.nextToken());
-	               		System.out.println(st.nextToken());
+	               		System.out.println(currquestion+".) "+st.nextToken());
                 	  }
                 	}
 

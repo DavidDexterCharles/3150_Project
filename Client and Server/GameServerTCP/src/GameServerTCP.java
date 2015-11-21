@@ -33,7 +33,7 @@ class GameServerTCP {
 
     	 System.out.println("To Do list:Block Duplicate Client Connection and allow mergeing of multiple files and also block ip address....");
          
-        String files="src/merge.txt|_|src/short.txt|_|/questions.txt";
+        String files="src/merge.txt|_|src/short.txt|_|src/questions.txt";
         StringTokenizer token = new StringTokenizer(files,"|_|");
         int fileamt=token.countTokens();
         System.out.println("Number of Categories: "+fileamt);
