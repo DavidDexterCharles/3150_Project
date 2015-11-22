@@ -117,12 +117,12 @@ class ServerThread extends Thread{
     String aquestion= " ";
     String answer = " ";
     String response="";
-	String end ="";
+    String end ="";
     String nextquestion="";
     String theclient ="";
     int score=0;
     String response2="";
-	String question_new="";
+    String question_new="";
     String newquestion="";
     String debug ="";
     QuestionHandler question=null;

@@ -46,7 +46,7 @@ public class ClientUI extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(650, 450));
         getContentPane().setLayout(null);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(420, 600, 321, 25);
+        jTextField1.setBounds(390, 630, 321, 25);
 
         SubBtn.setText("OK");
         SubBtn.setToolTipText("");
@@ -56,7 +56,7 @@ public class ClientUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SubBtn);
-        SubBtn.setBounds(750, 600, 68, 23);
+        SubBtn.setBounds(720, 630, 68, 23);
 
         MainDis.setEditable(false);
         MainDis.setColumns(20);
@@ -66,7 +66,7 @@ public class ClientUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(MainDis);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(270, 0, 620, 590);
+        jScrollPane1.setBounds(270, 20, 620, 590);
 
         jLabel1.setText("Host IP:");
         getContentPane().add(jLabel1);
