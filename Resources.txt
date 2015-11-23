@@ -1,5 +1,0 @@
-http://www.kellbot.com/2010/02/tutorial-writing-a-tcp-server-in-python/
-
-https://pymotw.com/2/socket/tcp.html
-
-http://www.tutorialspoint.com/python/python_networking.htm
