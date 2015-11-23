@@ -21,10 +21,7 @@ public class QuestionHandler { // The QuestionHandler class is used to allow a p
 	static int points = 0;
 	static int pointval=10;
     public QuestionHandler(String fileName) {
-
 		init(fileName);
-
-
     }
     public void reset() {// This function resets the certain variables and data structures  to a state that would seem as if questions are been asked an answered for the first time
 		this.count=0;

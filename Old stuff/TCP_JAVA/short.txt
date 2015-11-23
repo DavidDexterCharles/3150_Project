@@ -1,0 +1,8 @@
+Should the User Datagram Protocol(UDP) be considered to be more reliable than TCP?(yes/no)
+no
+
+Is telnet a protocol ?(yes/no)
+yes
+
+Does FDM have to do with different channels being transmitted in different frequency bands ?(yes/no)
+yes

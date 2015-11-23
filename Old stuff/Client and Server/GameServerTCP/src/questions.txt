@@ -1,0 +1,29 @@
+ Should the User Datagram Protocol(UDP) be considered to be more reliable than TCP?(yes/no)
+no
+
+ Is telnet a protocol ?(yes/no)
+yes
+
+Does FDM have to do with different channels being transmitted in different frequency bands ?(yes/no)
+yes
+
+ What is the name given to a transport layer packet ?
+segment 
+
+What is the name given to a linked layer packet ?
+frame
+
+What is the name given to a  network layer packet ?
+datagram
+
+Do routers forward packets based on IP address? (yes/no)
+yes
+
+Do link-layer switches forward packets based on Mac address ?(yes/no)
+yes
+
+Is the Transmission Control Protocol (TCP) reliable ?(yes/no)
+yes 
+
+Is telnet an application layer protocol that can be used for remote terminal access ?(yes/no)
+yes

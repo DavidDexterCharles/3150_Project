@@ -13,8 +13,10 @@ public class IpHandler {
 	private String fileName = "src/restricted.txt";
 	private	ArrayList<String> restrictedIPS = new ArrayList<String>();
 	private String line = null;
+        private String resp;
+        
 	public IpHandler() {
-		init();
+            init();
     }
 
 
@@ -37,17 +39,24 @@ public class IpHandler {
             	}
 			System.out.println("Restricted IPs : ");
 			System.out.println(restrictedIPS); // prints out an arraylist containing all of the restricted IP addresses
+//                        
+//                       resp="Restricted IPs : \n" +restrictedIPS;
+//                       setRestrictedIPS(resp);
             bufferedReader.close();// Always close files.
         }
         catch(FileNotFoundException ex) {
             System.out.println(
                 "Unable to open file '" +
                 fileName + "'");
+             resp="Unable to open file '" +fileName + "'";
+             setRestrictedIPS(resp);
         }
         catch(IOException ex) {
             System.out.println(
                 "Error reading file '"
                 + fileName + "'");
+            resp="Error reading file '" + fileName + "'";
+            setRestrictedIPS(resp);
             // Or
             // ex.printStackTrace();
         }
@@ -59,5 +68,24 @@ public class IpHandler {
 		else
 			return false;
     }
-
+    
+    public String getRestrictedIPS(){
+        String adder="";
+        for(int i=0;i<restrictedIPS.size();i++)
+        {
+            adder =adder+ restrictedIPS.get(i)+"\n";
+        
+        }
+        return adder;//"Restricted IPs : \n" +this.restrictedIPS;
+    }
+    
+    public void addBlockedIPs(ArrayList<String> blocked){
+        this.restrictedIPS.addAll(blocked);
+        //System.out.println();
+        
+    }   
+    
+    public void setRestrictedIPS(String resp) {
+        this.resp = resp;
+    }
 }

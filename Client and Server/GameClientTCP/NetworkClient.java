@@ -25,7 +25,7 @@ public static void main(String args[]) throws IOException{
     boolean gamestarted=false;
 
     try {
-        s1=new Socket("192.168.56.1", 4445); // You can use static final constant PORT_NUM
+        s1=new Socket(address, 4445); // You can use static final constant PORT_NUM
         br= new BufferedReader(new InputStreamReader(System.in));
         is=new BufferedReader(new InputStreamReader(s1.getInputStream()));
         os= new PrintWriter(s1.getOutputStream());
@@ -43,7 +43,7 @@ public static void main(String args[]) throws IOException{
     String qnum ="";
     String old_qnum ="";
 	String ans ="";
-	String ClientIP = address.getHostAddress();
+	String ClientIP ="";// address.getHostAddress();
 	String result="";
 	String nextquestion="";
 	String score="0";
@@ -52,6 +52,7 @@ public static void main(String args[]) throws IOException{
 
         line="start";
         StringTokenizer st = new StringTokenizer(response,"|_|");
+        StringTokenizer firsttoken = null;
         while(line.compareTo("quit")!=0){
 
                 if(line.equals("start"))
@@ -64,8 +65,9 @@ public static void main(String args[]) throws IOException{
                			line = "quit";
                		}
                		else{
-
-               			numquestions=Integer.parseInt(response);
+						firsttoken = new StringTokenizer(response,"|_|");
+               			numquestions=Integer.parseInt(firsttoken.nextToken());
+               			ClientIP=firsttoken.nextToken();
 	                	check=numquestions;
 	                	line = "waiting";
 	                	System.out.println("Server Response : "+check);
@@ -165,6 +167,7 @@ public static void main(String args[]) throws IOException{
 	                	os.println(line);
 	               		os.flush();
 	               		response = is.readLine();
+	               		System.out.println("something" + response);
 	               		st = new StringTokenizer(response,"|_|");
 	               		System.out.println(st.nextToken());
 	               		System.out.println("Current Score: "+st.nextToken());
