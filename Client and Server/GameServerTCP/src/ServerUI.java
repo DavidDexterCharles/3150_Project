@@ -245,58 +245,9 @@ public class ServerUI extends javax.swing.JFrame {
 
     private void run_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_run_btnActionPerformed
         // TODO add your handling code here:
-//        System.out.println(Category1.getText());
-//        System.out.println(Category2.getText());
-//        System.out.println(Category3.getText());
-
-        //store the cateogrys.gettext() (concat all 3) and send to the controller (ie dan)
-        //declare controller that will have methods to interact between dan and me
-        //String files = getCategory1() + "|_|" + getCategory2() + "|_|" + getCategory3();
-        //send across files
-        //show users connected and score :- sort in descending order by score
+        /* after the host button is clicked, the user is no longer allowed to edit the 
+        categories text field, edit the blocked IPs, nor click the Host button again*/
         
-        //show blocked users
-        //show server info: logging area (points for each user at each step), server running, # of categories being played
-   
-//        try{
-////            //server.ServerSession();
-////            //server.doprint();
-////            SwingWorker<Void,oid> worker = new SwingWorker<void,void>(){
-////
-////                @Override
-////                protected void doInBackground() throws Exception {
-////                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-////                }
-////                
-////                
-////            };
-////            
-////            worker.execute();
-////        }
-////        catch(Exception e){
-////            serverInfo.setText("123"+e.toString());
-////        }
-//
-//        
-//        
-//        
-//        SwingWorker<Void,Void> worker = new SwingWorker<Void,Void>(){
-//
-//            //@Override
-//            protected Void doInBackground() throws Exception {
-//            //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//           
-//                //server.doprint();
-//                Thread.sleep(100);
-//                
-//                server.ServerSession(serverUI);
-//               
-//                return null;
-//            }
-//        
-//        };
-//        
-//         worker.execute();   
         setrunwait(true);
         Category1.setEditable(false);
         Category2.setEditable(false);
@@ -318,6 +269,7 @@ public class ServerUI extends javax.swing.JFrame {
     
     private void disconnect_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnect_btnActionPerformed
         // TODO add your handling code here:
+        //the application ends when the user disconnects the server
         setrunwait(false);
         System.exit(0);
     }//GEN-LAST:event_disconnect_btnActionPerformed
@@ -369,13 +321,7 @@ public class ServerUI extends javax.swing.JFrame {
 
             //@Override
             protected Void doInBackground() throws Exception {
-            //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-           
-                //server.doprint();
-              //  Thread.sleep(1000);
-                
-                server.ServerSession(serverUI);
-               
+                server.ServerSession(serverUI);               
                 return null;
             }
         
@@ -446,14 +392,11 @@ public class ServerUI extends javax.swing.JFrame {
     
     public void setBlockedUsers(String blocked){
         blockedUsers.setText(blocked);
-        //iphandler.addBlockedIPs(blocked);
     }
     
     public void setServerInfo(String logInfo){
         
-       // serverInfo.setText("\n"+logInfo);
-         serverInfo.append("\n"+logInfo);
-        //serverInfo.update(serverInfo.getGraphics());
+        serverInfo.append("\n"+logInfo);
         System.out.println(logInfo);
     }
 
