@@ -88,12 +88,12 @@ public class ServerThread extends Thread{
             String Conplayers ="";
             Set<String> keys = players.keySet();
               for(String key: keys){
-                  Conplayers=Conplayers+"\n\n"+key+"               "+players.get(key)+"               "+HighestScore;
+                  Conplayers=Conplayers+"\n\n"+key+"\t\t\t"+players.get(key);
                   System.out.println(key);
                   System.out.println(players.get(key));
               }                 
 
-              serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser         GamesPlayed                     Highest Score\n"+Conplayers);
+              serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser \t\t\t GamesPlayed\n"+Conplayers);
 
             
             
@@ -101,8 +101,8 @@ public class ServerThread extends Thread{
             st = new StringTokenizer(line,"|_|");
             if(line.toLowerCase().equals("start"))
             {
-                resp="THE CONNECTED IP"+players.get(ClientIP);
-                serverUI.setServerInfo(resp);
+                resp="Connected IP: "+players.get(ClientIP);
+                //serverUI.setServerInfo(resp);
                 
                 if((ClientIPs.blockcheck(ClientIP)))
                 {
@@ -116,7 +116,7 @@ public class ServerThread extends Thread{
                     os.flush();
                     
                     resp="Response to Client  :  "+line;
-                    serverUI.setServerInfo(resp);
+                    //serverUI.setServerInfo(resp);
                     
                     line=is.readLine();
                 }
@@ -146,7 +146,7 @@ public class ServerThread extends Thread{
                     
                     System.out.println("line Value 1 : "+line);
                     resp="line Value 1 : "+line;
-                    serverUI.setServerInfo(resp);
+                    //serverUI.setServerInfo(resp);
                     
                     st = new StringTokenizer(line,"|_|");// declaration trapped within iff statement
 
@@ -155,7 +155,7 @@ public class ServerThread extends Thread{
                     
                     System.out.println("First being last test: "+correctans);
                     resp="First being last test: "+correctans;
-                    serverUI.setServerInfo(resp);
+                    //serverUI.setServerInfo(resp);
                       
                     
                     clientanswer=st.nextToken().toLowerCase().trim();
@@ -167,7 +167,7 @@ public class ServerThread extends Thread{
                     
                     System.out.println("The client startgame: "+theclient);             
                     resp="The client startgame: "+theclient;
-                    serverUI.setServerInfo(resp);
+                    //serverUI.setServerInfo(resp);
                 }
                 //System.out.println("st Value 2 : "+st.nextToken());
             }
@@ -181,11 +181,11 @@ public class ServerThread extends Thread{
                     PlayerScores.put(theclient+count,score);
                     if(score>HighestScore)HighestScore=(int)PlayerScores.get(theclient+count);
                    // System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+theclient+"    "+PlayerScores.get(theclient+count));
-                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser         GamesPlayed                     Highest Score\n"+Conplayers);
+                    System.out.println("Player and Score: "+theclient+"\t"+PlayerScores.get(theclient+count));
+                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser \t\t\t GamesPlayed\n"+Conplayers);
                     //resp="The client nextquestion: "+theclient;
                     //resp+="\nPlayer and Score: "+PlayerScores.get(theclient+count);
-                    resp="Player and Score: "+theclient+"    "+PlayerScores.get(theclient+count);
+                    resp="Player and Score: "+theclient+"\t"+PlayerScores.get(theclient+count);
                     serverUI.setServerInfo(resp);
                     
                     response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient+count)+"|_|"+newquestion;
@@ -196,9 +196,8 @@ public class ServerThread extends Thread{
                 {
 
                     //System.out.println("The client nextquestion: "+theclient);
-                    System.out.println("Player and Score: "+theclient+"    "+PlayerScores.get(theclient+count));
-                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser         GamesPlayed                     Highest Score\n"+Conplayers);
-                    resp="Player and Score: "+theclient+"    "+PlayerScores.get(theclient+count);
+                    System.out.println("Player and Score: "+theclient+"\t"+PlayerScores.get(theclient+count));
+                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser \t\t\t GamesPlayed\n"+Conplayers);                    resp="Player and Score: "+theclient+"\t"+PlayerScores.get(theclient+count);
                     serverUI.setServerInfo(resp);
                     response2 = "Sorry , the correct answer is "+correctans+"|_|"+PlayerScores.get(theclient+count)+"|_|"+newquestion;
                     os.println(response2 );
@@ -238,11 +237,10 @@ public class ServerThread extends Thread{
                      if(score>HighestScore)HighestScore=(int)PlayerScores.get(theclient+count);
                     System.out.println("The client nextquestion: "+theclient);
                     System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
-                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser         GamesPlayed                     Highest Score\n"+Conplayers);
-
+                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser \t\t\t GamesPlayed\n"+Conplayers);
                     resp="The client nextquestion: "+theclient;
                     resp+="\nPlayer and Score: "+PlayerScores.get(theclient+count);
-                    serverUI.setServerInfo(resp);
+                    //serverUI.setServerInfo(resp);
                     
                     response2 = correctans+" is correct"+"|_|"+PlayerScores.get(theclient+count)+"|_|"+end;
                     os.println(response2 );
@@ -253,7 +251,7 @@ public class ServerThread extends Thread{
                 {
                     System.out.println("The client nextquestion: "+theclient);
                     System.out.println("Player and Score: "+PlayerScores.get(theclient+count));
-                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser         GamesPlayed                     Highest Score\n"+Conplayers);
+                    serverUI.setUsersConnected("Number of users connected: "+players.size()+ "\n\nUser \t\t\t GamesPlayed\n"+Conplayers);
                     
                     resp="The client nextquestion: "+theclient;
                     resp+="\nPlayer and Score: "+PlayerScores.get(theclient+count);
@@ -297,7 +295,7 @@ public class ServerThread extends Thread{
                 
                 System.out.println(" Socket Input Stream Closed");  
                 resp=" Socket Input Stream Closed";
-                serverUI.setServerInfo(resp);
+                //serverUI.setServerInfo(resp);
             }
 
             if(os!=null){
@@ -305,7 +303,7 @@ public class ServerThread extends Thread{
                 
                 System.out.println("Socket Out Closed");                
                 resp="Socket Out Closed";
-                serverUI.setServerInfo(resp);
+                //serverUI.setServerInfo(resp);
             }
             if (s!=null){
                 s.close();

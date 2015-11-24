@@ -88,8 +88,8 @@ public class GameServerTCP {
                 question.get(0).getAnswers().addAll(question.get(x+1).getAnswers());
                 x=x+1;
             }
-            serverUI.setServerInfo("\nNumber of Categories"+"Number of Questions ");
-            serverUI.setServerInfo(""+fileamt+""+ question.get(0).getnumQuestions());
+            serverUI.setServerInfo("\nNumber of Categories\t\t"+"Number of Questions ");
+            serverUI.setServerInfo("\t"+fileamt+"\t\t\t\t"+ question.get(0).getnumQuestions());
 		 while(true) {
 		 	try{
 		///////////////////////////////////////////////////////////////////////
@@ -98,10 +98,11 @@ public class GameServerTCP {
            	InetAddress IP = connectionSocket.getInetAddress();// IP of the client
            	String ClientIP =IP.getHostAddress();// IP.getHostName();//IP.getHostAddress();
         //System.out.println(ClientIP);
-	System.out.println("Data received from Client IP Address "+ ClientIP);
-        serverUI.setServerInfo("Data received from Client IP Address "+ ClientIP);
-	System.out.println("connection Established");
-        serverUI.setServerInfo("connection Established");
+	//System.out.println("Data received from Client IP Address "+ ClientIP);
+        //serverUI.setServerInfo("Connection Established");
+        //serverUI.setServerInfo("Data received from Client IP Address "+ ClientIP);
+	//System.out.println("connection Established");
+        
                         //players.clear();
                         
                         
@@ -119,7 +120,7 @@ public class GameServerTCP {
                           if((ClientIPs.blockcheck(ClientIP))==false)
                              players.put(ClientIP,temp);
                           else{
-                              serverUI.setServerInfo(" Restricted IP "+ClientIP+" attempted to connect");
+                              serverUI.setServerInfo("Restricted IP "+ClientIP+" attempted to connect");
                           }
                           
                         }

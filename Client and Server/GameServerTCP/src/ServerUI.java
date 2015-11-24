@@ -58,6 +58,7 @@ public class ServerUI extends javax.swing.JFrame {
         blockUser_textField = new javax.swing.JTextField();
         blockUser_btn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -95,7 +96,7 @@ public class ServerUI extends javax.swing.JFrame {
             }
         });
 
-        run_btn.setText("Run");
+        run_btn.setText("Host");
         run_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 run_btnActionPerformed(evt);
@@ -140,6 +141,9 @@ public class ServerUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("(add more than one by entering each IP and clicking Block User)");
 
+        jLabel4.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel4.setText("Restricted IPs");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +178,8 @@ public class ServerUI extends javax.swing.JFrame {
                                 .addGap(150, 150, 150)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
@@ -184,7 +189,9 @@ public class ServerUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(69, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(7, 7, 7)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
@@ -390,6 +397,7 @@ public class ServerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
