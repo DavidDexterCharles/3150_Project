@@ -160,7 +160,7 @@ public class ServerThread extends Thread{
                         PlayerScores.put(theclient+count,score); //stores client new score with client ip
                         
                         if(score>HighestScore)
-                            HighestScore=(int)PlayerScores.get(theclient+count);//gets highest score
+                            HighestScore=(int)PlayerScores.get(theclient+count);//gets highest score future implementation
                         
                        
                         
