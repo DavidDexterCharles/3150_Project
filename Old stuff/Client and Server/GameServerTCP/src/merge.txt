@@ -1,2 +1,0 @@
-Is the text file merger working?
-yes
