@@ -17,7 +17,7 @@ Client:
 	This is the player app, Multiple players would be able to connect to the game host (via threads), players can then all start the game and when the game is over each player knows who finished first and who got the highest score.
 
 Technologies:
-Java, Jcreator, Netbeans, J-Frae, Eclipse
+Java, Jcreator, Netbeans, J-Frame, Eclipse
 
 
 #Marking Scheme
